@@ -5,7 +5,7 @@
 
 //任务链表
 typedef struct tpool_work {
-	void* (routine)(void*);	//任务函数
+	void* (*routine)(void*);	//任务函数
 	void *arg;			//函数参数
 	struct tpool_work *next;
 }tpool_work_t;
