@@ -1,1 +1,1 @@
-A simple threadpool.
+A simple threadpool realized in C.
