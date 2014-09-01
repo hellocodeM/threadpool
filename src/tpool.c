@@ -16,7 +16,7 @@ static void* t_routine(void *arg) {
 			pthread_cond_wait(&tpool->queue_cond, &tpool->queue_lock);
 		}
 		//关闭线程池
-		if (tpool->shutdown) {
+		if (tpool->shutdown && !tpool->works->next) {
 			pthread_mutex_unlock(&tpool->queue_lock);
 			pthread_exit(NULL);
 		}
@@ -67,7 +67,6 @@ int tpool_create(int pool_size) {
 
 int tpool_destroy() {
 	tpool->shutdown = 1;
-	perror("waiting for every thread end");
 	//唤醒所有工作线程	
 	pthread_mutex_lock(&tpool->queue_lock);
 	pthread_cond_broadcast(&tpool->queue_cond);

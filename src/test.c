@@ -23,7 +23,6 @@ int main(int argc, char **argv) {
 	for (int i = 0; i < 10; i++) {
 		tpool_submit_work(func, (void*)&num[i]);
 	}
-	sleep(3);
 	tpool_destroy();
 	return 0;
 }
